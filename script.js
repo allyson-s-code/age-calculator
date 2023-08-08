@@ -6,9 +6,11 @@ const yearInput = document.getElementById("year");
 const inputs = document.querySelectorAll("input");
 const submit = document.querySelector(".age-btn");
 
-//validate each:
-
-//listen
+const currentDate = new Date();
+let currentYear = currentDate.getFullYear();
+let currentMonth = currentDate.getMonth();
+let currentDay = currentDate.getDate();
+const daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 function addError(elem, error) {
   elem.nextElementSibling.setAttribute("aria-hidden", "false");
@@ -35,13 +37,6 @@ function isValidDate(dateString) {
   return !isNaN(dateObject) && dateObject instanceof Date;
 }
 
-function calculateAge(dateString) {
-  const now = new Date();
-  console.log(dateString);
-  const diff = new Date(now.valueOf() - dateString.valueOf());
-  return Math.abs(diff.getFullYear() - 1970);
-}
-
 function validate(dayInput, monthInput, yearInput) {
   const emptyError = "This field is required";
   const invalidDayError = "Must be a valid day";
@@ -53,9 +48,6 @@ function validate(dayInput, monthInput, yearInput) {
   const monthValue = monthInput.value;
   const yearValue = yearInput.value;
   let birthday = `${yearValue}-${monthValue}-${dayValue}`;
-
-  const currentDate = new Date();
-  let currentYear = currentDate.getFullYear();
 
   // Check day input
   if (isEmpty(dayValue)) {
@@ -98,27 +90,38 @@ function validate(dayInput, monthInput, yearInput) {
   if (!isValidDate(birthday)) {
     addError(dayInput, invalidDateError);
   } else if (isValidDate(birthday)) {
-    calculateAge(birthday);
-    //displayAgeDetails(birthday);
+    calculateAndDisplayAge(dayValue, monthValue, yearValue);
   }
 
-  // (e.g., check if the date is valid using a library like "date-fns" or "moment.js")
-  // This part is not implemented in the provided code.
+  console.log(isValidDate(birthday));
 }
 
-//check overall validity of date
+//calculate age
+function calculateAndDisplayAge(dayValue, monthValue, yearValue) {
+  if (dayValue > currentDay) {
+    currentDay = currentDay + daysInMonths[currentMonth - 1];
+    currentMonth = currentMonth - 1;
+  }
 
-//Any field is empty when the form is submitted
-//The day number is not between 1-31
-//The month number is not between 1-12
-//The year is in the future
-//The date is invalid e.g. 31/04/1991 (there are 30 days in April)
+  if (monthValue > currentMonth) {
+    currentMonth = currentMonth + 12;
+    currentYear = currentYear - 1;
+  }
 
-//calculate years, months, days
-//display
-//dayInput.addEventListener("keyup", validate);
-//monthInputInput.addEventListener("keyup", validate);
-//yearInput.addEventListener("keyup", validate);
+  const days = currentDay - dayValue;
+  const months = currentMonth - monthValue;
+  const years = currentYear - yearValue;
+
+  const displayDays = document.querySelector(".output-days");
+  const displayMonths = document.querySelector(".output-months");
+  const displayYears = document.querySelector(".output-years");
+
+  displayYears.innerText = `${years}`;
+  displayMonths.innerText = `${months}`;
+  displayDays.innerText = `${days}`;
+  console.log(years, months, days);
+}
+
 submit.addEventListener("click", () => {
   validate(dayInput, monthInput, yearInput);
 });
