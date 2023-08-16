@@ -13,6 +13,9 @@ let currentDay = currentDate.getDate();
 const daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 function addError(elem, error) {
+  //reset output?
+  resetOutput();
+
   elem.nextElementSibling.setAttribute("aria-hidden", "false");
   inputs.forEach((input) => (input.style.borderColor = "hsl(0, 100%, 67%)"));
   inputs.forEach((input) =>
@@ -120,6 +123,16 @@ function calculateAndDisplayAge(dayValue, monthValue, yearValue) {
   displayMonths.innerText = `${months}`;
   displayDays.innerText = `${days}`;
   console.log(years, months, days);
+}
+
+function resetOutput() {
+  const displayDays = document.querySelector(".output-days");
+  const displayMonths = document.querySelector(".output-months");
+  const displayYears = document.querySelector(".output-years");
+
+  displayYears.innerText = `--`;
+  displayMonths.innerText = `--`;
+  displayDays.innerText = `--`;
 }
 
 submit.addEventListener("click", () => {

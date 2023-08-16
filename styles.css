@@ -1,0 +1,203 @@
+/*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+#root,
+#__next {
+  isolation: isolate;
+}
+
+/*
+=============== 
+Variables
+===============
+*/
+
+:root {
+  --error: hsl(0, 100%, 67%);
+  --bright-accent: hsl(259, 100%, 65%);
+  --white: hsl(0, 0%, 100%);
+  --off-white: hsl(0, 0%, 94%);
+  --light-grey: hsl(0, 0%, 86%);
+  --smokey-grey: hsl(0, 1%, 44%);
+  --off-black: hsl(0, 0%, 8%);
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 85px;
+  background-color: var(--off-white);
+  font-family: "Poppins", sans-serif;
+  color: var(--off-black);
+}
+
+.card {
+  width: 92%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--white);
+  border-top-left-radius: 6%;
+  border-top-right-radius: 6%;
+  border-bottom-left-radius: 6%;
+  border-bottom-right-radius: 22%;
+  margin-bottom: 25px;
+  padding: 48px 0;
+}
+
+.birthday-form {
+  width: 87%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.birthday-inputs {
+  width: 100%;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  min-width: 0; /*overrides browser setting which was making it larger than parent div */
+}
+
+.birthday-input {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.375rem;
+}
+
+label {
+  color: var(--smokey-grey);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+}
+
+input {
+  color: var(--off-black);
+  border: 1px solid var(--light-grey);
+  border-radius: 7px;
+  padding: 12px;
+  line-height: 0;
+  margin-top: 5px;
+}
+
+input:focus {
+  outline: 1px solid var(--bright-accent);
+}
+
+hr {
+  border: 0;
+  width: 100%;
+  height: 2px;
+  border-top: 2px solid var(--light-grey);
+  margin-top: 62px;
+}
+
+button {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bright-accent);
+  position: relative;
+  top: -33px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--off-black);
+}
+
+button svg {
+  width: 25px;
+}
+
+.age-btn-arrow {
+  stroke-width: 4;
+}
+
+.age-container {
+  width: 100%;
+  font-style: italic;
+  font-size: 3.4rem;
+  font-weight: 900;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.1;
+}
+
+.output-age {
+  color: var(--bright-accent);
+}
+
+.error {
+  color: var(--error);
+  border-color: var(--error);
+}
+
+.alert-text {
+  font-weight: 400;
+  font-size: 0.625rem;
+  font-style: italic;
+  color: var(--error);
+  margin-top: 5px;
+}
+
+.attribution {
+  font-size: 11px;
+  font-weight: 400;
+  text-align: center;
+}
+.attribution a {
+  color: var(--bright-accent);
+}
