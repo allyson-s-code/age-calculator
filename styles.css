@@ -80,18 +80,19 @@ body {
   flex-direction: column;
   align-items: center;
   background-color: var(--white);
-  border-top-left-radius: 6%;
-  border-top-right-radius: 6%;
-  border-bottom-left-radius: 6%;
-  border-bottom-right-radius: 22%;
+  border-top-left-radius: 22px;
+  border-top-right-radius: 22px;
+  border-bottom-left-radius: 22px;
+  border-bottom-right-radius: 95px;
   margin-bottom: 25px;
   padding: 48px 0;
 }
 
 .birthday-form {
-  width: 87%;
+  width: 85%;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -158,18 +159,19 @@ button:hover {
 }
 
 button svg {
-  width: 25px;
+  width: 26px;
 }
 
 .age-btn-arrow {
-  stroke-width: 4;
+  stroke-width: 3;
 }
 
 .age-container {
   width: 100%;
   font-style: italic;
-  font-size: 3.4rem;
+  font-size: 3.5rem;
   font-weight: 900;
+  letter-spacing: 0.01rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -200,4 +202,69 @@ button svg {
 }
 .attribution a {
   color: var(--bright-accent);
+}
+
+@media only screen and (min-width: 768px) {
+  .card {
+    max-width: 840px;
+    border-bottom-right-radius: 180px;
+    padding: 60px 0 52px 0;
+  }
+
+  .birthday-form {
+    width: 87%;
+    height: auto;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .birthday-inputs {
+    width: 75%;
+  }
+
+  .birthday-input {
+    width: 29%;
+    font-size: 2rem;
+  }
+
+  label {
+    font-size: 0.875rem;
+  }
+
+  input {
+    border-radius: 8px;
+    padding-left: 22px;
+    margin-top: 9px;
+  }
+
+  hr {
+    margin-top: 45px;
+  }
+
+  button {
+    width: 95px;
+    height: 95px;
+    display: flex;
+    align-self: flex-end;
+    position: relative;
+    top: -50px;
+  }
+
+  button svg {
+    width: 45px;
+  }
+
+  .age-btn-arrow {
+    stroke-width: 2;
+  }
+
+  .age-container {
+    font-size: 6.5rem;
+    margin-top: -50px;
+  }
+
+  .alert-text {
+    font-size: 0.855rem;
+    margin-top: 9px;
+  }
 }
