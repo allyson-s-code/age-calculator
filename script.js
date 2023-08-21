@@ -15,7 +15,6 @@ const daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 function addError(elem, error) {
   //reset output?
   resetOutput();
-
   elem.nextElementSibling.setAttribute("aria-hidden", "false");
   inputs.forEach((input) => (input.style.borderColor = "hsl(0, 100%, 67%)"));
   inputs.forEach((input) =>
@@ -35,9 +34,17 @@ function removeError(elem) {
 
 const isEmpty = (value) => (value === "" ? true : false);
 
-function isValidDate(dateString) {
-  const dateObject = new Date(dateString);
-  return !isNaN(dateObject) && dateObject instanceof Date;
+function isValidDate(day, month, year) {
+  const maxDaysInMonth = daysInMonths[month - 1];
+  return (
+    !isNaN(year) &&
+    !isNaN(month) &&
+    !isNaN(day) &&
+    month >= 1 &&
+    month <= 12 &&
+    day >= 1 &&
+    day <= maxDaysInMonth
+  );
 }
 
 function validate(dayInput, monthInput, yearInput) {
@@ -90,13 +97,13 @@ function validate(dayInput, monthInput, yearInput) {
   }
 
   // Check overall validity of date
-  if (!isValidDate(birthday)) {
+  if (!isValidDate(dayValue, monthValue, yearValue)) {
     addError(dayInput, invalidDateError);
-  } else if (isValidDate(birthday)) {
+  } else if (isValidDate(dayValue, monthValue, yearValue)) {
     calculateAndDisplayAge(dayValue, monthValue, yearValue);
   }
 
-  console.log(isValidDate(birthday));
+  console.log(isValidDate(dayValue, monthValue, yearValue));
 }
 
 //calculate age
