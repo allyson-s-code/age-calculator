@@ -13,7 +13,7 @@ let currentDay = currentDate.getDate();
 const daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 function addError(elem, error) {
-  //reset output?
+  //reset output
   resetOutput();
   elem.nextElementSibling.setAttribute("aria-hidden", "false");
   inputs.forEach((input) => (input.style.borderColor = "hsl(0, 100%, 67%)"));
@@ -48,25 +48,26 @@ function isValidDate(day, month, year) {
 }
 
 function validate(dayInput, monthInput, yearInput) {
-  const emptyError = "This field is required";
-  const invalidDayError = "Must be a valid day";
-  const invalidMonthError = "Must be a valid month";
-  const invalidYearError = "Must be in the past";
-  const invalidDateError = "Must be a valid date";
-
   const dayValue = dayInput.value;
   const monthValue = monthInput.value;
   const yearValue = yearInput.value;
-  let birthday = `${yearValue}-${monthValue}-${dayValue}`;
+
+  const errorMessages = {
+    empty: "This field is required",
+    invalidDay: "Must be a valid day",
+    invalidMonth: "Must be a valid month",
+    invalidYear: "Must be in the past",
+    invalidDate: "Must be a valid date",
+  };
 
   // Check day input
   if (isEmpty(dayValue)) {
-    addError(dayInput, emptyError);
+    addError(dayInput, errorMessages.empty);
     console.log("is Empty");
   } else if (!isEmpty(dayValue)) {
     removeError(dayInput);
     if (dayValue < 1 || dayValue > 31) {
-      addError(dayInput, invalidDayError);
+      addError(dayInput, errorMessages.empty);
     } else {
       removeError(dayInput);
     }
@@ -74,11 +75,11 @@ function validate(dayInput, monthInput, yearInput) {
 
   //check month input
   if (isEmpty(monthValue)) {
-    addError(monthInput, emptyError);
+    addError(monthInput, errorMessages.empty);
   } else if (!isEmpty(monthValue)) {
     removeError(monthInput);
     if (monthValue < 1 || monthValue > 12) {
-      addError(monthInput, invalidMonthError);
+      addError(monthInput, errorMessages.invalidMonth);
     } else {
       removeError(monthInput);
     }
@@ -86,11 +87,11 @@ function validate(dayInput, monthInput, yearInput) {
 
   //check year input
   if (isEmpty(yearValue)) {
-    addError(yearInput, emptyError);
+    addError(yearInput, errorMessages.empty);
   } else if (!isEmpty(yearValue)) {
     removeError(yearInput);
     if (yearValue > currentYear) {
-      addError(yearInput, invalidYearError);
+      addError(yearInput, errorMessages.invalidYear);
     } else {
       removeError(yearInput);
     }
@@ -98,16 +99,16 @@ function validate(dayInput, monthInput, yearInput) {
 
   // Check overall validity of date
   if (!isValidDate(dayValue, monthValue, yearValue)) {
-    addError(dayInput, invalidDateError);
+    addError(dayInput, errorMessages.invalidDate);
   } else if (isValidDate(dayValue, monthValue, yearValue)) {
-    calculateAndDisplayAge(dayValue, monthValue, yearValue);
+    calculateAge(dayValue, monthValue, yearValue);
   }
 
   console.log(isValidDate(dayValue, monthValue, yearValue));
 }
 
 //calculate age
-function calculateAndDisplayAge(dayValue, monthValue, yearValue) {
+function calculateAge(dayValue, monthValue, yearValue) {
   if (dayValue > currentDay) {
     currentDay = currentDay + daysInMonths[currentMonth - 1];
     currentMonth = currentMonth - 1;
@@ -122,6 +123,10 @@ function calculateAndDisplayAge(dayValue, monthValue, yearValue) {
   const months = currentMonth - monthValue;
   const years = currentYear - yearValue;
 
+  updateDisplay(days, months, years);
+}
+
+function updateDisplay(days, months, years) {
   const displayDays = document.querySelector(".output-days");
   const displayMonths = document.querySelector(".output-months");
   const displayYears = document.querySelector(".output-years");
@@ -129,7 +134,6 @@ function calculateAndDisplayAge(dayValue, monthValue, yearValue) {
   displayYears.innerText = `${years}`;
   displayMonths.innerText = `${months}`;
   displayDays.innerText = `${days}`;
-  console.log(years, months, days);
 }
 
 function resetOutput() {
