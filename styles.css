@@ -205,6 +205,10 @@ button svg {
 }
 
 @media only screen and (min-width: 768px) {
+  body {
+    padding-top: 170px;
+  }
+
   .card {
     max-width: 840px;
     border-bottom-right-radius: 180px;

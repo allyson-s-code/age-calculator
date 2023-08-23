@@ -60,6 +60,9 @@ function validate(dayInput, monthInput, yearInput) {
     invalidDate: "Must be a valid date",
   };
 
+  // Clear the animation interval
+  clearInterval(counting);
+
   // Check day input
   if (isEmpty(dayValue)) {
     addError(dayInput, errorMessages.empty);
@@ -100,7 +103,8 @@ function validate(dayInput, monthInput, yearInput) {
   // Check overall validity of date
   if (!isValidDate(dayValue, monthValue, yearValue)) {
     addError(dayInput, errorMessages.invalidDate);
-  } else if (isValidDate(dayValue, monthValue, yearValue)) {
+  } else {
+    removeError(dayInput);
     calculateAge(dayValue, monthValue, yearValue);
   }
 
@@ -123,17 +127,53 @@ function calculateAge(dayValue, monthValue, yearValue) {
   const months = currentMonth - monthValue;
   const years = currentYear - yearValue;
 
-  updateDisplay(days, months, years);
+  updateDataCount(days, months, years);
 }
 
-function updateDisplay(days, months, years) {
+function updateDataCount(days, months, years) {
   const displayDays = document.querySelector(".output-days");
   const displayMonths = document.querySelector(".output-months");
   const displayYears = document.querySelector(".output-years");
 
-  displayYears.innerText = `${years}`;
-  displayMonths.innerText = `${months}`;
-  displayDays.innerText = `${days}`;
+  displayYears.dataset.count = years;
+  displayMonths.dataset.count = months;
+  displayDays.dataset.count = days;
+
+  updateDisplay();
+}
+
+let counting;
+
+function updateDisplay() {
+  const counters = document.querySelectorAll(".output-age");
+
+  counters.forEach((counter) => {
+    const finalCount = parseInt(counter.dataset.count);
+
+    console.log(finalCount);
+    console.log(counter.innerText);
+
+    updateCounting(counter, finalCount);
+  });
+}
+
+function updateCounting(counter, finalCount) {
+  let initialCount = 0;
+
+  counting = setInterval(() => {
+    initialCount++;
+    counter.innerText = `${initialCount}`;
+
+    console.log(initialCount);
+    console.log(finalCount);
+    if (initialCount >= finalCount) {
+      resetCounting(counting);
+    }
+  }, 50);
+}
+
+function resetCounting() {
+  clearInterval(counting); //Clear the interval using the shared counting variable
 }
 
 function resetOutput() {
@@ -141,9 +181,14 @@ function resetOutput() {
   const displayMonths = document.querySelector(".output-months");
   const displayYears = document.querySelector(".output-years");
 
-  displayYears.innerText = `--`;
-  displayMonths.innerText = `--`;
-  displayDays.innerText = `--`;
+  displayYears.dataset.count = "";
+  displayYears.innerText = "--";
+
+  displayMonths.dataset.count = "";
+  displayMonths.innerText = "--";
+
+  displayDays.dataset.count = "";
+  displayDays.innerText = "--";
 }
 
 submit.addEventListener("click", () => {
