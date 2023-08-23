@@ -61,7 +61,7 @@ function validate(dayInput, monthInput, yearInput) {
   };
 
   // Clear the animation interval
-  clearInterval(counting);
+  //clearInterval(counting);
 
   // Check day input
   if (isEmpty(dayValue)) {
@@ -142,38 +142,24 @@ function updateDataCount(days, months, years) {
   updateDisplay();
 }
 
-let counting;
-
 function updateDisplay() {
   const counters = document.querySelectorAll(".output-age");
 
   counters.forEach((counter) => {
-    const finalCount = parseInt(counter.dataset.count);
+    let initialCount = 0;
+    const finalCount = counter.dataset.count;
 
-    console.log(finalCount);
-    console.log(counter.innerText);
+    let counting = setInterval(updateCounting, 50);
 
-    updateCounting(counter, finalCount);
-  });
-}
+    function updateCounting() {
+      initialCount++;
+      counter.innerText = `${initialCount}`;
 
-function updateCounting(counter, finalCount) {
-  let initialCount = 0;
-
-  counting = setInterval(() => {
-    initialCount++;
-    counter.innerText = `${initialCount}`;
-
-    console.log(initialCount);
-    console.log(finalCount);
-    if (initialCount >= finalCount) {
-      resetCounting(counting);
+      if (initialCount >= finalCount) {
+        clearInterval(counting);
+      }
     }
-  }, 50);
-}
-
-function resetCounting() {
-  clearInterval(counting); //Clear the interval using the shared counting variable
+  });
 }
 
 function resetOutput() {
