@@ -8,7 +8,7 @@ const submit = document.querySelector(".age-btn");
 
 const currentDate = new Date();
 let currentYear = currentDate.getFullYear();
-let currentMonth = currentDate.getMonth();
+let currentMonth = currentDate.getMonth() + 1;
 let currentDay = currentDate.getDate();
 const daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
@@ -66,7 +66,7 @@ function validate(dayInput, monthInput, yearInput) {
   // Check day input
   if (isEmpty(dayValue)) {
     addError(dayInput, errorMessages.empty);
-    console.log("is Empty");
+    //console.log("is Empty");
   } else if (!isEmpty(dayValue)) {
     removeError(dayInput);
     if (dayValue < 1 || dayValue > 31) {
@@ -108,7 +108,7 @@ function validate(dayInput, monthInput, yearInput) {
     calculateAge(dayValue, monthValue, yearValue);
   }
 
-  console.log(isValidDate(dayValue, monthValue, yearValue));
+  //console.log(isValidDate(dayValue, monthValue, yearValue));
 }
 
 //calculate age
@@ -152,12 +152,12 @@ function updateDisplay() {
     let counting = setInterval(updateCounting, 50);
 
     function updateCounting() {
-      initialCount++;
       counter.innerText = `${initialCount}`;
 
       if (initialCount >= finalCount) {
         clearInterval(counting);
       }
+      initialCount++;
     }
   });
 }
