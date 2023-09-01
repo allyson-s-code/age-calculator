@@ -96,29 +96,24 @@ function validate(dayInput, monthInput, yearInput) {
 
 With the styling I learned a new outcome of forms and browser settings. My `fieldset` was larger than it's parent div and to rectify this I learned from my research that I should add a property of `min-width: 0;` to the `fieldset`.
 
+As a bonus for this project I added animation to the age output which was a lot of fun. I love how dynamic it makes the app.
+
+I also learned that values of `border-radius` in percentages can stretch and sometimes it's better to use set measurements like `px`.
+
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
-
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+I want to continue sharpening my JS skills and including accessibilty best practices. I'm also really interested in growing my CSS and animation skills.
 
 ### Useful resources
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
-
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
+- [CodingDesign Number Counting Animation](https://www.youtube.com/watch?v=WfDIU93fN3o) -
+- [CSS-tricks Animating Number Counters](https://css-tricks.com/animating-number-counters/) - This article by Carter Li gives some cool CSS alternatives to the JS animation.
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
-
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
+- Website - [Allyson Smith](https://smithstudio.dev/)
+- Frontend Mentor - [@allyson-s-code](https://www.frontendmentor.io/profile/allyson-s-code)
 
 ## Acknowledgments
 
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
+Thanks so much to Jeet Saru at CodingDesign and your super helpful YouTube video on Number Counting Animation!
